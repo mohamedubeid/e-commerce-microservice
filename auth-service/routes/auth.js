@@ -8,6 +8,14 @@ const { rabbitMQConnection } = require('../utils/rabbitMQ-connect');
 
 const amqpServer = "amqp://localhost:5672";
 const queue_name = "USERS";
+const object1 = {};
+(async () => {
+    const channel = await rabbitMQConnection(amqpServer, queue_name);
+    Object.defineProperty(object1, 'channel', {
+        value: channel,
+        writable: false
+    });
+})();
 
 router.post('/login',
     async (req, res) => {
@@ -50,13 +58,12 @@ router.post('/register',
             }
             const hashedPassword = await hashPassword(password);
             const newUser = await User.create({ name, email, password: hashedPassword });
-            const channel = await rabbitMQConnection(amqpServer, queue_name);
             const payload = {
                 event: "add user",
                 user_id: newUser.id,
             }
             const message = JSON.stringify(payload);
-            channel.sendToQueue(queue_name, Buffer.from(message), {
+            object1.channel.sendToQueue(queue_name, Buffer.from(message), {
                 persistent: true
             });
             return res.status(201).json(newUser);
@@ -84,13 +91,12 @@ router.delete('/user/:id',
                     id: user_id
                 }
             });
-            const channel = await rabbitMQConnection(amqpServer, queue_name);
             const payload = {
                 event: "delete user",
                 user_id
             }
             const message = JSON.stringify(payload);
-            channel.sendToQueue(queue_name, Buffer.from(message), {
+            object1.channel.sendToQueue(queue_name, Buffer.from(message), {
                 persistent: true
             });
             return res.status(202).json({ msg: "User Deactivated Successfully" })
