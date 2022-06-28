@@ -142,7 +142,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "15"
+									"value": "1"
 								}
 							]
 						}
@@ -195,7 +195,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.MzI.fl-IKHytTnJ8eVv-bnaScWOMmt3UejOtj24ATeG_K8c",
+									"value": "eyJhbGciOiJIUzI1NiJ9.NQ.6lV_pmORkEl0XyYjT6Ebpb0yke6ShzjwE3A4hjF3dOE",
 									"type": "string"
 								}
 							]
@@ -204,7 +204,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"products\": [44,55],\r\n    \"total_price\" : 32\r\n}",
+							"raw": "{\r\n    \"products\": [2, 3]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
