@@ -16,7 +16,7 @@ const User = db.define('User', {
         unique: true,
         validate: {
             isEmail: {
-                msg: "Should be Valid Email"
+                msg: 'Should be Valid Email'
             }
         }
     },

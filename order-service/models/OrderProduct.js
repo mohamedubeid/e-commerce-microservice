@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 const db = require('../database/config');
 
-const Order = db.define('Order', {
+const OrderProduct = db.define('OrderProduct', {
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
@@ -13,18 +13,17 @@ const Order = db.define('Order', {
         type: DataTypes.INTEGER,
         allowNull: false,
     },
-    total_price: {
+    product_id: {
         type: DataTypes.INTEGER,
+        allowNull: false,
     }
 }, {
-    modelName: 'Order',
-    tableName: 'Orders',
-    timestamps: true,
-    updatedAt: false
+    modelName: 'OrderProduct',
+    tableName: 'OrderProducts',
 });
 
-Order.sync().then(() => {
-    console.log('Orders table created.');
+OrderProduct.sync().then(() => {
+    console.log('OrderProducts table created.');
 });
 
-module.exports = Order;
+module.exports = OrderProduct;
