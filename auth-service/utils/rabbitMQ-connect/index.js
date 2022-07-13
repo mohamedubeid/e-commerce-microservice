@@ -7,7 +7,7 @@ const createConnection = async (amqpServer) => {
     } catch (error) {
         throw error;
     }
-}
+};
 
 const createChannel = async (connection) => {
     try {
@@ -16,18 +16,18 @@ const createChannel = async (connection) => {
     } catch (error) {
         throw error;
     }
-}
+};
 
 const channelAssertQueue = async (channel, queue_name) => {
     try {
         await channel.assertQueue(queue_name, {
-            durable: true
+            durable: true,
         });
         return;
     } catch (error) {
         throw error;
     }
-}
+};
 
 const rabbitMQConnection = async (amqpServer, queue_name) => {
     try {
@@ -36,10 +36,8 @@ const rabbitMQConnection = async (amqpServer, queue_name) => {
         await channelAssertQueue(channel, queue_name);
         return channel;
     } catch (error) {
-        console.log(error);
         throw error;
     }
-}
-
+};
 
 module.exports = { rabbitMQConnection };
